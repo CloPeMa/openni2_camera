@@ -663,9 +663,15 @@ std::string OpenNI2Driver::resolveDeviceURI(const std::string& device_id) throw(
       if (s.find(bus) != std::string::npos)
       {
         // this matches our bus, check device number
+
+		// S.M. the code assumes that the device number is 0
+/*
         --device_number;
         if (device_number <= 0)
           return s;
+*/
+		 if ( device_number == 0 || s.find(bus + '/' + device_number_str.str()) != std::string::npos )
+		return s ;
       }
     }
 
