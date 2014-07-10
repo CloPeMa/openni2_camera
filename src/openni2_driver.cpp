@@ -188,8 +188,11 @@ void OpenNI2Driver::configCb(Config &config, uint32_t level)
 
   data_skip_ = config.data_skip+1;
 
-  applyConfigToOpenNIDevice();
-
+  try {
+    applyConfigToOpenNIDevice();
+  } catch (...) {
+    ROS_ERROR("Xtion not started correctly - cannot send parameters to device");
+  }
   config_init_ = true;
 
   old_config_ = config;
